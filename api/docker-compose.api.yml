@@ -1,0 +1,21 @@
+version: '2.3'
+
+services:
+  popug_api:
+    extends:
+      file: docker-compose.base.yml
+      service: api_base
+    restart: unless-stopped
+    networks:
+      - popug_network
+    ports:
+      - 3002:3002
+      - 10005:10005 # debug port
+    depends_on:
+      popug_mongodb:
+        condition: service_healthy
+    command: ["npm", "run", "start"]
+
+networks:
+  popug_network:
+    external: true

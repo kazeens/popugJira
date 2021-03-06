@@ -1,0 +1,19 @@
+version: '2.3'
+
+services:
+  popug_mongodb:
+    extends:
+      file: docker-compose.base.yml
+      service: mongodb_base
+    ports:
+      - 27018:27017
+    networks:
+      - popug_network
+
+volumes:
+  mongodb:
+    external: true
+
+networks:
+  popug_network:
+    external: true
